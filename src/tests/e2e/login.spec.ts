@@ -1,8 +1,8 @@
 import {test, expect} from "@playwright/test";
 
 test.describe("Login page Tests", () => {
-    test("Verify that login page is successfully loaded", async ({page}) => {
-            await page.goto("https://test.busnetwork.net/");
+    test("Verify that login page is successfully loaded", async ({page,baseURL}) => {
+            await page.goto(baseURL);
             await expect(page.getByRole('button', {name: 'flag'})).toBeVisible();
             await expect(page.getByRole('button', {name: 'Help '})).toBeVisible();
             await expect(page.locator('div').filter({hasText: /^BusNetwork$/})).toBeVisible();
@@ -16,10 +16,10 @@ test.describe("Login page Tests", () => {
         }
     );
 
-    test("Verify that user is able to insert user name and password", async ({page })=>{
-        await page.goto('https://test.busnetwork.net/auth/signin');
+    test.only("Verify that user is able to insert user name and password", async ({page,baseURL })=>{
+        await page.goto(baseURL);
         await expect(page.getByRole('textbox', { name: 'Enter your email address' })).toBeVisible();
-        await page.getByRole('textbox', { name: 'Enter your email address' }).click();
+        await page.getByRole('textbox', { name: 'Entdfgher your email address' }).click();
         await page.getByRole('textbox', { name: 'Enter your email address' }).fill('share_food@yopmail.com');
         await expect(page.getByRole('textbox', { name: 'Enter your email address' })).toHaveValue('share_food@yopmail.com');
         await expect(page.getByRole('textbox', { name: 'Password' })).toBeVisible();
@@ -29,4 +29,11 @@ test.describe("Login page Tests", () => {
         await page.getByRole('button', { name: 'Sign in ' }).click();
         await page.goto('https://test.busnetwork.net/request-trip?organization=');
     })
+
+
+    test('test', async ({ page, baseURL }) => {
+        await page.goto(baseURL);
+        await expect(page.getByText('Email address')).toBeVisible();
+        await expect(page.getByText('Password', { exact: true })).toBeVisible();
+    });
 });
