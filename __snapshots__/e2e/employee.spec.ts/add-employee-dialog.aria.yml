@@ -1,0 +1,21 @@
+- dialog:
+  - heading "Add employee" [level=3]
+  - button "Close"
+  - paragraph: User role
+  - checkbox
+  - paragraph: Admin
+  - paragraph: Can access the BusNetwork portal and create additional users and vehicles, as well as receive and handle trips shared from contractors
+  - checkbox
+  - paragraph: Driver
+  - paragraph: Can access the Ferdia BusNetwork driver app to receive, run and report on assigned trips
+  - text: First name
+  - textbox
+  - text: Last name
+  - textbox
+  - text: Phone
+  - button "Country Code Selector"
+  - textbox "Phone"
+  - text: Email address (* mandatory to access the BusNetwork portal and driver app )
+  - textbox
+  - button "Cancel"
+  - button "Add employee" [disabled]

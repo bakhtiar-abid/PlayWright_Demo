@@ -1,0 +1,13 @@
+- dialog:
+  - heading "Add vehicle" [level=3]
+  - button "Close"
+  - text: Name
+  - textbox
+  - text: Registration number
+  - textbox
+  - text: Seat capacity
+  - spinbutton: "0"
+  - heading "Details (optional)" [level=2]:
+    - button "Details (optional)" [expanded]
+  - button "Cancel"
+  - button "Add vehicle"
