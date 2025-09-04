@@ -1,39 +1,52 @@
-import {test, expect} from "@playwright/test";
+import {expect, test} from "@playwright/test";
+import LoginPage from "../../pages/LoginPage";
 
 test.describe("Login page Tests", () => {
-    test("Verify that login page is successfully loaded", async ({page,baseURL}) => {
-            await page.goto(baseURL);
-            await expect(page.getByRole('button', {name: 'flag'})).toBeVisible();
-            await expect(page.getByRole('button', {name: 'Help '})).toBeVisible();
-            await expect(page.locator('div').filter({hasText: /^BusNetwork$/})).toBeVisible();
-            await expect(page.getByRole('heading', {name: 'Welcome!'})).toBeVisible();
-            await expect(page.getByText('Email address')).toBeVisible();
-            await expect(page.getByRole('textbox', {name: 'Enter your email address'})).toBeVisible();
-            await expect(page.getByText('Password', {exact: true})).toBeVisible();
-            await expect(page.getByRole('textbox', {name: 'Password'})).toBeVisible();
-            await expect(page.getByText('Forgot your password?')).toBeVisible();
-            await expect(page.getByRole('button', {name: 'Sign in '})).toBeVisible();
+    test("Verify that login page is successfully loaded", async ({page, baseURL}) => {
+            // await page.goto(baseURL);
+            // await expect(page.getByRole('button', {name: 'flag'})).toBeVisible();
+            // await expect(page.getByRole('button', {name: 'Help '})).toBeVisible();
+            // await expect(page.locator('div').filter({hasText: /^BusNetwork$/})).toBeVisible();
+            // await expect(page.getByRole('heading', {name: 'Welcome!'})).toBeVisible();
+            // await expect(page.getByText('Email address')).toBeVisible();
+            // await expect(page.getByRole('textbox', {name: 'Enter your email address'})).toBeVisible();
+            // await expect(page.getByText('Password', {exact: true})).toBeVisible();
+            // await expect(page.getByRole('textbox', {name: 'Password'})).toBeVisible();
+            // await expect(page.getByText('Forgot your password?')).toBeVisible();
+            // await expect(page.getByRole('button', {name: 'Sign in '})).toBeVisible();
+
+            let loginPage = new LoginPage(page)
+            await loginPage.visit(baseURL)
+            await loginPage.loginWithCredentials(process.env.USER_EMAIL!, process.env.USER_PASSWORD!)
+            await loginPage.verifyLoginSuccess()
         }
     );
 
-    test.only("Verify that user is able to insert user name and password", async ({page,baseURL })=>{
+    test("Verify that user is able to insert user name and password", async ({page, baseURL}) => {
         await page.goto(baseURL);
-        await expect(page.getByRole('textbox', { name: 'Enter your email address' })).toBeVisible();
-        await page.getByRole('textbox', { name: 'Entdfgher your email address' }).click();
-        await page.getByRole('textbox', { name: 'Enter your email address' }).fill('share_food@yopmail.com');
-        await expect(page.getByRole('textbox', { name: 'Enter your email address' })).toHaveValue('share_food@yopmail.com');
-        await expect(page.getByRole('textbox', { name: 'Password' })).toBeVisible();
-        await page.getByRole('textbox', { name: 'Password' }).click();
-        await page.getByRole('textbox', { name: 'Password' }).fill('Pass@1234');
-        await expect(page.getByRole('textbox', { name: 'Password' })).toHaveValue('Pass@1234');
-        await page.getByRole('button', { name: 'Sign in ' }).click();
-        await page.goto('https://test.busnetwork.net/request-trip?organization=');
+        await expect(page.getByRole('textbox', {name: 'Enter your email address'})).toBeVisible();
+        await page.getByRole('textbox', {name: 'Enter your email address'}).click();
+        await page.getByRole('textbox', {name: 'Enter your email address'}).fill(process.env.USER_EMAIL);
+        await expect(page.getByRole('textbox', {name: 'Enter your email address'})).toHaveValue(process.env.USER_EMAIL);
+        await expect(page.getByRole('textbox', {name: 'Password'})).toBeVisible();
+        await page.getByRole('textbox', {name: 'Password'}).click();
+        await page.getByRole('textbox', {name: 'Password'}).fill(process.env.USER_PASSWORD!);
+        await expect(page.getByRole('textbox', {name: 'Password'})).toHaveValue(process.env.USER_PASSWORD!);
+        await page.getByRole('button', {name: 'Sign in '}).click();
+        await page.goto(`${baseURL}/request-trip?organization=`);
     })
 
 
-    test('test', async ({ page, baseURL }) => {
+    test('test', async ({page, baseURL}) => {
         await page.goto(baseURL);
         await expect(page.getByText('Email address')).toBeVisible();
-        await expect(page.getByText('Password', { exact: true })).toBeVisible();
+        await page.getByRole("button").getByAltText("flag").click()
+        await page.locator("#overlay_menu").screenshot({path: 'screenshot.png'});
+        await page.locator("#overlay_menu").getByRole("listitem").nth(0).screenshot({path: 'screenshot0.png'});
+        await page.locator("#overlay_menu").getByRole("listitem").nth(1).screenshot({path: 'screenshot1.png'});
+        await page.locator("#overlay_menu").getByRole("listitem").nth(2).screenshot({path: 'screenshot2.png'});
+        await page.locator("#overlay_menu").getByRole("listitem").nth(3).screenshot({path: 'screenshot3.png'});
+        await expect(page.locator("#overlay_menu").getByRole("listitem")).toHaveCount(4)
+        await expect(page.locator("#overlay_menu").getByRole("listitem")).toContainText([" Danish", " English", " Norwegian", " Swedish"]);
     });
 });
