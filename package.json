@@ -6,8 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "test:e2e": "npx playwright test",
+    "test:tags": "npx playwright test --grep @csv",
     "test:e2e_login": "npx playwright test src/tests/e2e/login.spec.ts",
-    "test:codegen": "npx playwright codegen https://test.busnetwork.net"
+    "test:codegen": "npx playwright codegen https://test.busnetwork.net",
+    "test:report": "npx playwright show-report"
   },
   "keywords": [],
   "author": "",
@@ -16,6 +18,7 @@
   "devDependencies": {
     "@playwright/test": "^1.55.0",
     "@types/node": "^24.3.0",
+    "csv-parse": "^6.1.0",
     "dotenv": "^17.2.2"
   }
 }
