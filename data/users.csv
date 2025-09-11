@@ -1,0 +1,7 @@
+user,password,status,expected
+share_food@yopmail.com,Pass@1234,passed,Master admin
+marin_food@yopmail.com,Pass@1234,passed,Master admin
+faizulcse@yopmail.com,Pass@1234,passed,Admin
+invalid@yopmail.com,Pass@1234,failed,Incorrect username or password.
+share_food@yopmail.com,InvalidPass@1234,failed,Incorrect username or password.
+share_food@yopmail.com,InvalidPass@1234,failed,Incorrect username or password.
