@@ -1,11 +1,12 @@
 import {defineConfig} from "@playwright/test";
 import * as dotenv from "dotenv";
 import * as fs from "node:fs";
-import {parse} from "csv-parse/sync";
+
+import { parse } from "csv-parse/sync";
 
 dotenv.config({path: ".env.test"});
 export const testData = JSON.parse(fs.readFileSync('./data/users.json', 'utf-8'));
-export const csvData = parse(fs.readFileSync('./data/users.csv'), {
+export const csvData = parse(fs.readFileSync('./data/users.csv', 'utf-8'), {
     columns: true,
     skip_empty_lines: true
 });
