@@ -30,5 +30,62 @@ export default defineConfig({
         video: "on",
         headless: false,
         browserName: "chromium"
-    }
+    },
+     projects: [
+    {
+      name: 'setup',
+      testMatch: /.*global\.setup\.ts/,
+      use: { 
+        browserName: 'chromium',
+        headless: false,
+        baseURL: process.env.BASE_URL,
+        screenshot:"on",
+        video: "on"
+       },
+       teardown: 'teardown'
+    },
+
+     {
+      name: 'teardown',
+      testMatch: /.*global\.setup\.ts/,
+      use: { 
+        browserName: 'chromium',
+        headless: false,
+        baseURL: process.env.BASE_URL,
+        screenshot:"on",
+        video: "on"
+       },
+       teardown: 'teardown'
+    },
+
+    // {
+    //   name: 'firefox',
+    //   use: { ...devices['Desktop Firefox'] },
+    // },
+
+    // {
+    //   name: 'webkit',
+    //   use: { ...devices['Desktop Safari'] },
+    // },
+
+    /* Test against mobile viewports. */
+    // {
+    //   name: 'Mobile Chrome',
+    //   use: { ...devices['Pixel 5'] },
+    // },
+    // {
+    //   name: 'Mobile Safari',
+    //   use: { ...devices['iPhone 12'] },
+    // },
+
+    /* Test against branded browsers. */
+    // {
+    //   name: 'Microsoft Edge',
+    //   use: { ...devices['Desktop Edge'], channel: 'msedge' },
+    // },
+    // {
+    //   name: 'Google Chrome',
+    //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
+    // },
+  ],
 })
